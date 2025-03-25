@@ -1,3 +1,4 @@
+/* Estilos básicos para todo o documento */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -6,21 +7,24 @@ body {
     text-align: center;
 }
 
+/* Estilização do cabeçalho com logo do McDonald's */
 header {
-    background-color: #d71a28;
+    background-color: #d71a28;  
     color: white;
     padding: 20px;
     font-size: 10px;
 }
 
+/* Configuração padrão para todas as imagens */
 img {
     max-width: 100%;
     height: auto;
     margin: 20px 0;
 }
 
+/* Estilização do botão de menu hamburguer para mobile */
 .menu-toggle {
-    display: none;
+    display: none;  /* Inicialmente oculto, só aparece em telas pequenas */
     flex-direction: column;
     justify-content: space-between;
     width: 30px;
@@ -28,17 +32,20 @@ img {
     cursor: pointer;
 }
 
+/* Barras do menu hamburguer */
 .menu-toggle .bar {
     height: 4px;
     background-color: white;
     width: 100%;
 }
 
+/* Estilização da barra de navegação */
 nav {
     background-color: #333;
     padding: 10px;
 }
 
+/* Lista de navegação principal */
 nav ul {
     list-style: none;
     padding: 0;
@@ -46,28 +53,32 @@ nav ul {
     justify-content: center;
 }
 
+/* Itens da navegação */
 nav ul li {
     margin: 0 15px;
 }
 
+/* Links da navegação */
 nav ul li a {
     text-decoration: none;
     color: white;
     font-weight: bold;
 }
 
-
+/* Estilização das seções de conteúdo (Lanches, Sobremesas, Bebidas) */
 section {
     padding: 20px;
     margin-bottom: 30px;
 }
 
+/* Títulos das seções */
 section h2 {
-    color: #d71a28;
+    color: #d71a28;  /* Vermelho McDonald's */
     font-size: 28px;
     margin-bottom: 30px;
 }
 
+/* Container de cada produto */
 .produto {
     display: flex;
     flex-direction: column;
@@ -78,17 +89,20 @@ section h2 {
     margin-right: auto;
 }
 
+/* Imagens dos produtos */
 .produto img {
     max-width: 80%;
     margin-bottom: 15px;
 }
 
+/* Títulos dos produtos */
 .produto h1 {
     color: #333;
     font-size: 24px;
     margin: 10px 0;
 }
 
+/* Descrições dos produtos */
 .produto p {
     color: #666;
     margin: 10px 0;
@@ -96,11 +110,13 @@ section h2 {
     padding: 0 15px;
 }
 
+/* Preços dos produtos */
 .produto h3 {
-    color: #d71a28;
+    color: #d71a28;  /* Vermelho McDonald's */
     margin: 10px 0;
 }
 
+/* Rodapé da página */
 footer {
     background-color: #333;
     color: white;
@@ -108,8 +124,9 @@ footer {
     font-size: 14px;
 }
 
-
+/* Adaptações para telas médias (tablets e celulares na horizontal) */
 @media (max-width: 768px) {
+    /* Ajustes do menu para formato mobile */
     nav ul {
         display: none;
         width: 100%;
@@ -157,12 +174,14 @@ footer {
     }
 }
 
-
+/* Adaptações para telas pequenas (smartphones na vertical) */
 @media (max-width: 480px) {
+    /* Ajustes específicos para telas muito pequenas */
     .produto {
-        width: 95%;
+        width: 95%;  /* Aumenta largura para melhor visualização */
     }
 
+    /* Ajustes de tamanho de fonte e imagens para telas pequenas */
     .produto img {
         max-width: 90%;
     }
