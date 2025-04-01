@@ -32,20 +32,12 @@ img {
     cursor: pointer;
 }
 
-/* Barras do menu hamburguer */
-.menu-toggle .bar {
-    height: 4px;
-    background-color: white;
-    width: 100%;
-}
 
-/* Estilização da barra de navegação */
 nav {
     background-color: #333;
     padding: 10px;
 }
 
-/* Lista de navegação principal */
 nav ul {
     list-style: none;
     padding: 0;
@@ -53,32 +45,33 @@ nav ul {
     justify-content: center;
 }
 
-/* Itens da navegação */
 nav ul li {
     margin: 0 15px;
 }
 
-/* Links da navegação */
 nav ul li a {
     text-decoration: none;
     color: white;
     font-weight: bold;
 }
 
-/* Estilização das seções de conteúdo (Lanches, Sobremesas, Bebidas) */
-section {
-    padding: 20px;
-    margin-bottom: 30px;
+/* Botão do menu mobile */
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 21px;
+    cursor: pointer;
 }
 
-/* Títulos das seções */
-section h2 {
-    color: #d71a28;  /* Vermelho McDonald's */
-    font-size: 28px;
-    margin-bottom: 30px;
+.menu-toggle .bar {
+    height: 4px;
+    background-color: white;
+    width: 100%;
 }
 
-/* Container de cada produto */
+/* Estilização melhorada dos produtos */
 .produto {
     display: flex;
     flex-direction: column;
@@ -87,12 +80,118 @@ section h2 {
     max-width: 600px;
     margin-left: auto;
     margin-right: auto;
+    padding: 20px;
+    border-radius: 12px;
+    background: white;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Imagens dos produtos */
-.produto img {
-    max-width: 80%;
-    margin-bottom: 15px;
+.produto:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+/* Container da imagem do produto */
+.produto-imagem-container {
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+    width: 80%;
+}
+
+.produto-imagem-container img {
+    width: 100%;
+    transition: transform 0.3s ease;
+}
+
+/* Informações que aparecem ao passar o mouse */
+.produto-hover-info {
+    position: absolute;
+    bottom: -40px;
+    left: 0;
+    right: 0;
+    background: rgba(215, 26, 40, 0.9);
+    color: white;
+    padding: 8px;
+    transition: bottom 0.3s ease;
+}
+
+.produto-imagem-container:hover img {
+    transform: scale(1.05);
+}
+
+.produto-imagem-container:hover .produto-hover-info {
+    bottom: 0;
+}
+
+.calorias {
+    font-weight: bold;
+    font-size: 0.9em;
+}
+
+/* Estilização melhorada dos botões */
+.btn-adicionar {
+    background: #d71a28;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 25px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 15px;
+}
+
+.btn-adicionar:hover {
+    background: #b51621;
+    transform: scale(1.05);
+}
+
+/* Melhorias no carrinho */
+.item-carrinho {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px;
+    border-bottom: 1px solid #eee;
+    transition: background-color 0.3s ease;
+}
+
+.item-carrinho:hover {
+    background-color: #f8f8f8;
+}
+
+.remover-item {
+    background-color: #d71a28;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 12px;
+}
+
+.remover-item:hover {
+    background-color: #b51621;
+    transform: scale(1.1);
+}
+
+/* Animação para novos itens no carrinho */
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.item-carrinho {
+    animation: slideIn 0.3s ease forwards;
 }
 
 /* Títulos dos produtos */
@@ -124,9 +223,172 @@ footer {
     font-size: 14px;
 }
 
-/* Adaptações para telas médias (tablets e celulares na horizontal) */
+/* ==========================================
+   Carrinho de Compras
+   ========================================== */
+#carrinho-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+
+.carrinho-botao {
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    background-color: #d71a28;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    padding: 12px;
+}
+
+.carrinho-icone {
+    width: 35px;
+    height: 35px;
+    object-fit: contain;
+    filter: brightness(0) invert(1);
+    transition: transform 0.3s ease;
+}
+
+.carrinho-botao:hover .carrinho-icone {
+    transform: scale(1.1);
+}
+
+.carrinho-contador {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background-color: #333;
+    color: white;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    border: 2px solid white;
+}
+
+/* Popup do carrinho */
+.carrinho-popup {
+    position: absolute;
+    bottom: 75px;
+    right: 0;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    width: 320px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+/* Ajuste da animação do popup */
+#carrinho-container:not(.carrinho-minimizado) .carrinho-popup {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* Melhorar a aparência do cabeçalho do carrinho */
+.carrinho-header {
+    background-color: #f8f8f8;
+    border-radius: 12px 12px 0 0;
+    padding: 15px 20px;
+    border-bottom: 1px solid #eee;
+}
+
+.carrinho-header h3 {
+    font-size: 18px;
+    color: #333;
+    margin: 0;
+}
+
+.fechar-carrinho {
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: #666;
+    cursor: pointer;
+    padding: 0 5px;
+}
+
+#carrinho-lista {
+    max-height: 300px;
+    overflow-y: auto;
+    padding: 10px;
+}
+
+.item-carrinho {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.item-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+}
+
+.item-nome {
+    font-weight: 500;
+    color: #333;
+}
+
+.item-preco {
+    color: #666;
+    font-size: 14px;
+}
+
+.remover-item {
+    background: none;
+    border: none;
+    color: #d71a28;
+    cursor: pointer;
+    padding: 5px;
+    font-size: 16px;
+    transition: transform 0.2s ease;
+}
+
+.remover-item:hover {
+    transform: scale(1.2);
+}
+
+#total-carrinho {
+    padding: 15px;
+    font-weight: bold;
+    color: #d71a28;
+    border-top: 1px solid #eee;
+    text-align: right;
+}
+
+/* Animação do carrinho */
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+}
+
+.carrinho-botao:active {
+    animation: bounce 0.3s ease;
+}
+
+   
+
 @media (max-width: 768px) {
-    /* Ajustes do menu para formato mobile */
     nav ul {
         display: none;
         width: 100%;
@@ -143,7 +405,6 @@ footer {
         display: flex;
     }
 
-    
     .menu.active ul {
         display: flex;
     }
@@ -174,14 +435,11 @@ footer {
     }
 }
 
-/* Adaptações para telas pequenas (smartphones na vertical) */
 @media (max-width: 480px) {
-    /* Ajustes específicos para telas muito pequenas */
     .produto {
-        width: 95%;  /* Aumenta largura para melhor visualização */
+        width: 95%;
     }
 
-    /* Ajustes de tamanho de fonte e imagens para telas pequenas */
     .produto img {
         max-width: 90%;
     }
@@ -196,5 +454,79 @@ footer {
 
     .produto h3 {
         font-size: 15px;
+    }
+
+    .carrinho-popup {
+        width: 290px;
+        right: 10px;
+    }
+
+    .carrinho-botao {
+        width: 60px;
+        height: 60px;
+    }
+}
+
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+}
+
+
+.lazy-image {
+    opacity: 0;
+    transition: opacity 0.3s ease-in;
+}
+
+.lazy-image[src] {
+    opacity: 1;
+}
+
+/* Estilo para o indicador de tipo de produto */
+.tipo-indicador {
+    margin: 10px 0;
+    padding: 4px 12px;
+    border-radius: 15px;
+    font-size: 12px;
+    display: inline-block;
+}
+
+.tipo-indicador.tradicional {
+    background-color: #f0f0f0;
+    color: #666;
+}
+
+.tipo-indicador.vegetariano {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+}
+
+.tipo-indicador.vegano {
+    background-color: #e3f2fd;
+    color: #1565c0;
+}
+
+.tipo-texto {
+    text-transform: capitalize;
+    font-weight: 500;
+}
+
+/* Ajuste para telas pequenas */
+@media (max-width: 480px) {
+    .tipo-indicador {
+        font-size: 11px;
+        padding: 3px 10px;
     }
 }
